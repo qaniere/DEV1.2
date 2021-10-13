@@ -1,0 +1,37 @@
+body {
+    background-image: url("./val.png");
+    color: magenta;
+    font-family: "Arial";
+}
+
+h1 {
+    color: rgb(255, 0, 0);
+}
+
+p {
+    color: black;
+}
+
+span {
+    font-size: 15px;
+}
+
+label {
+    color: green;
+}
+
+input {
+    width: 20vw;
+}
+
+#text-container {
+    width: 50vw;
+}
+
+#title {
+    height: 50%;
+    width: 50%;
+    display: block;
+    margin-left: 27vw;
+}
+
