@@ -1,0 +1,184 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;;
+}
+
+nav {
+    width: 100vw;
+    height: 10vh;
+
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+nav > h1 {
+    margin: 1vh;
+    margin-left: 10vw;
+
+    font-size: 5vh;
+    font-family: 'Rubik', sans-serif;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+    margin-left: 10vw;
+    width: 80vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+section {
+    width: 50vw;
+    margin-top: 5vh;
+
+    text-align: justify;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#menu {
+    width: 70vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#banner-container {
+    height: 90vh;
+    width: 100vw;
+    position: relative;
+}
+
+#banner-text-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 90vh;
+    width: 100vw;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#banner-text-container > h2 {
+    font-size: 13vh;
+    font-family: 'Rubik', sans-serif;
+}
+
+#banner-text-container > span {
+    margin-top: -10vh;
+    font-size: 5vh;
+}
+
+#banner {
+    height: 90vh;
+    width: 100vw;
+    object-fit: cover;
+}
+
+#mobile-menu {
+    display: none;
+}
+
+#mobile-menu-icon {
+    display: none;;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1vh;
+    font-size: 3vh;
+    height: 5vh;
+    width: 7vw;
+}
+
+.section-title {
+    margin: 0;
+    font-size: 5vh;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+}
+
+.add-padding {
+    margin-top: 20vh;
+}
+
+@media screen and (max-width: 992px) {
+
+    nav > h1 {
+        margin-left: 2vw;
+        font-size: 3vh;
+    }
+
+    main {
+        margin-left: 0;
+        width: 100vw;
+    }
+
+    section {
+        width: 80vw;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    li {
+        font-size: 3vh;
+    }
+
+    #banner-text-container > h2 {
+        font-size: 7vh;
+    }
+
+    #banner-text-container > span {
+        margin-top: -6vh;
+        font-size: 3vh;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #mobile-menu {
+        display: none;
+        position: absolute;
+        margin-top: 20vh;
+        height: 15vh;
+        width: 100vw;
+    }
+
+    #mobile-menu-icon {
+        display: block;
+        height: 4vh;
+        padding-left: 40vw;
+        right: 0;
+    }
+
+    .mobile-menu-item > a {
+        color: turquoise;
+    }
+
+    .nav-larger {
+        padding-bottom: 15vh;
+    }
+}
