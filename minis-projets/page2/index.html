@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription au cours de  M. Gaudelier</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <h1>Inscription au cours de  M. Gaudelier</h1>
+    <form id="register-form">
+        <h2>Formulaire d'inscription</h2>
+        <div>
+            <label for="username">Pseudo :</label>
+            <input id="username" type="text"  maxlength="20" placeholder="John7856" required>
+        </div>
+        <div>
+            <label for="age">Votre âge :</label>
+            <input id="age" type="number" min="0" max="130" placeholder="18" required>
+        </div>
+        <div>
+            <label for="password">Votre mot de passe :</label>
+            <input id="password" type="password" required>
+        </div>
+        <div>
+            <label for="password-verification">Confirmation du mot de passe:</label>
+            <input id="password-verification" type="password" required>
+        </div>
+        <input type="submit" value="S'inscrire">
+    </form>
+    <div id="table-container">
+        <h2>Liste des inscrits</h2>
+        <table id="register-table">
+            <tr>
+                <td><strong>ID</strong></td>
+                <td><strong>Pseudo</strong></td>
+                <td><strong>Age</strong></td>
+                <td><strong>Hash du mot de passe</strong></td>
+                <td><strong>Action</strong></td>
+            </tr>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
