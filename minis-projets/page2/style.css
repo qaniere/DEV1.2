@@ -43,6 +43,7 @@ body > * {
 
 table {
     width: 50vw;
+    margin-bottom: 2vh;
     border-collapse: collapse;
 }
 
@@ -59,6 +60,7 @@ td {
 
 
 .hash-div {
+    width: 10vw;
     overflow-x: scroll;
 }
 
