@@ -17,19 +17,19 @@
 		* V�rification du mot de passe - FAIT
 		
 		Le tableau quant �lui doit contenir les champs suivants :
-		- ID : le num�ro d'inscription de la personne
-		- Pseudo
-		- Age
-		- Date et heure d'envoi
-		- Hash du mot de passe
-		- Un bouton pour supprimer une ligne (l'ID n'est pas affect� par cela)
+		- ID : le num�ro d'inscription de la personne - FAIT
+		- Pseudo - FAIT
+		- Age - FAIT 
+		- Date et heure d'envoi - FAIT
+		- Hash du mot de passe - FAIT  
+		- Un bouton pour supprimer une ligne (l'ID n'est pas affect� par cela) - FAIT
 		
 		A l'envoi les choses suivantes doivent �tre effectu�es/v�rifi�es :
 		- Que les donn�es soient conformes (sinon le formulaire n'est pas envoy� et l'utilisateur est avertis)
-			- Age uniquement compos� de chiffrespseudo de moins de 20 char
-			- Les deux mots de passe correspondent
-			- S'il manque une des informations obligatoires (not�es par une *)
-		- Le formulaire doit �tre vid�, sauf s'il n'est pas conforme
+			- Age uniquement compos� de chiffrespseudo de moins de 20 char - FAIT
+			- Les deux mots de passe correspondent - FAIT
+			- S'il manque une des informations obligatoires (not�es par une *) - FAIT
+		- Le formulaire doit �tre vid�, sauf s'il n'est pas conforme - FAIT
 		- Si les informations envoy�es sont d�j� pr�sentent dans le tableau, alors ce dernier n'est pas modifi�
 		- Il ne faut pas qu'il y ait de faille XSS
 		

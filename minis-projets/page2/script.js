@@ -21,7 +21,7 @@ if(localStorage.getItem("id") != null && localStorage.getItem("database") != nul
     //Replacing default values by retrieved one 
 
     for(i = 0; i < userDatabase.length; i++) {
-        createLine(REGISTER_TABLE, userDatabase[i]);
+        appendLine(REGISTER_TABLE, userDatabase[i]);
     }
 }
 
@@ -62,6 +62,11 @@ function getIndexOfUser(list, id) {
     return null;
 }
 
+
+/**
+ * This function return the current date and time.
+ * Format : dd/mm/yyyy hh:mm:ss
+ */
 function getDateTime() {
     let today = new Date();
 
@@ -79,7 +84,14 @@ function getDateTime() {
     return completeDate + " " + completeTime;
 }
 
-function createLine(element, infos) {
+/**
+ * This function append a line in the HTML table given
+ * in arguments.
+ *  
+ * @param {object} element The HTML table.
+ * @param {object} infos A JSON object. It must have id, username, age, registerDate, hashedPassword attributes.
+ */
+function appendLine(element, infos) {
 
     let row = element.insertRow(); //Creation of a tr element 
     let cell1 = row.insertCell(0); //Creation of a td element
@@ -90,27 +102,42 @@ function createLine(element, infos) {
     let cell6 = row.insertCell(5);
 
     row.id = infos.id;
-    cell1.innerText = infos.id;
-    cell2.innerText = infos.username;
+    cell1.innerText = infos.id; 
+    cell2.innerText = infos.username; //Using innerText instead of innerHTML prevent XSS injection
     cell3.innerText = infos.age;
     cell4.innerText = infos.registerDate;
-    cell5.innerHTML = "<div class='hash-div'>" + infos.hashedPassword + "</div>";
-    cell6.innerHTML = "<button id='" + infos.id + "'>Supprimer</button>";
+    cell5.innerHTML = "<div class='hash-div'>" + infos.hashedPassword + "</div>"; //We can use innerHTML here because data was treated after user input;
+    cell6.innerHTML = "<button id='" + infos.id + "'>Supprimer</button>"; //Same here
 
+    //This callback will be triggered when the button in the last cell is clicked
     cell6.children[0].addEventListener("click", () => {
 
         let confirmOperation = confirm("Voulez-vous vraiment supprimer cet utilisateur ?");
+        //confirm return true if the user click yes and false otherwise
 
         if(confirmOperation) {
-            let rowId = cell6.children[0].id
+            let rowId = cell6.children[0].id; //The row id is stored in the button id;
             document.getElementById(rowId).remove();
             
-            let index_to_pop = getIndexOfUser(userDatabase, rowId);
-            userDatabase.splice(index_to_pop, 1);
+            let indexToPop = getIndexOfUser(userDatabase, rowId);
+            userDatabase.splice(indexToPop, 1); //Delete 1 element from the position "index_to_pop";
             localStorage.setItem("database", JSON.stringify(userDatabase));
         }   
     });
 }
+
+/**
+ * This function hash a given message. This function is asynchronous
+ * because calculate a hash can take several seconds on old devices.
+ * 
+ * This function return a promise and when the promise is complete it's
+ * return a string. Exemple of calling :
+ *    - hashSha512("password4545").then( (hashedPassword) => {
+ *          console.log("The hased password is " + hashedPassword);
+ * });
+ *  
+ * @param {string} element The message to hash.
+ */
 
 async function hashSha512(message) {
 
@@ -122,6 +149,7 @@ async function hashSha512(message) {
     return hashHex;
 }
 
+//This callback is executed when the form is submited (Enter key on last input or click on submit button)
 FORM.addEventListener("submit", (event) => {
 
     event.preventDefault(); //Prevent the default behaviour of the form HTML element (use post or get)
@@ -150,40 +178,36 @@ FORM.addEventListener("submit", (event) => {
             age = "N/C";
         }
 
+        id++;
         let registerDate = getDateTime();
 
         hashSha512(password).then( (hashedPassword) => {
 
-            id++;
-            new_entry = {
+            let newUser = {
                 "id": id,
                 "username": username,
                 "age": age,
                 "registerDate": registerDate,
                 "hashedPassword": hashedPassword
             };
-            userDatabase.push(new_entry);
+
+            userDatabase.push(newUser);
             localStorage.setItem("database", JSON.stringify(userDatabase)); 
             localStorage.setItem("id", id);
 
-            createLine(REGISTER_TABLE, new_entry)
+            appendLine(REGISTER_TABLE, newUser);
 
             alert("Inscription réussie !");
             USERNAME_INPUT.value = "";
             AGE_INPUT.value = "";
             PASSWORD_INPUT.value = "";
             PASSWORD_VERIFICATION_INPUT.value = "";
-
-            
+            //Empty the form
         });
     }
 });
 
-/**
- * This function does no take any parameters, she is called when the 
- * delete button is clicked and then she ask user confirmation and clear 
- * table and localStorage.
- */
+//This callback is triggered when the delete button is clicked
  DELETE_BUTTON.addEventListener("click", () => {
 
     let userConfirmation = confirm("Voulez-vous vraiment effacer toutes les entrées ?");
@@ -195,7 +219,7 @@ FORM.addEventListener("submit", (event) => {
            document.getElementById(idToDelete).remove();
         }
 
-        localStorage.removeItem("id");
+        userDatabase = [];
         localStorage.removeItem("database");
     }
 });
