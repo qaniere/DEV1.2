@@ -198,10 +198,7 @@ FORM.addEventListener("submit", (event) => {
             appendLine(REGISTER_TABLE, newUser);
 
             alert("Inscription réussie !");
-            USERNAME_INPUT.value = "";
-            AGE_INPUT.value = "";
-            PASSWORD_INPUT.value = "";
-            PASSWORD_VERIFICATION_INPUT.value = "";
+            FORM.reset();
             //Empty the form
         });
     }
