@@ -1,9 +1,16 @@
-const RADIUS_DISPLAY = document.getElementById("radius-display");
 const CANVAS = document.getElementById("canvas");
 const CTX = canvas.getContext("2d");  
 const DPI = window.devicePixelRatio; //The resolution of screen
 
-let radius = 10;
+const RADIUS_DISPLAY = document.getElementById("radius-display");
+const CLEAR_BUTTON = document.getElementById("clear-button");
+const DOWNLOAD_BUTTON = document.getElementById("download-button");
+const DOWNLOAD_LINK = document.getElementById("download-link");
+const PLUS_BUTTON = document.getElementById("plus-button");
+const MINUS_BUTTON = document.getElementById("minus-button");
+
+let radius = 50;
+let canvasData = null;
 
 let heightAfterStyle = + getComputedStyle(CANVAS).getPropertyValue("height").slice(0, -2); 
 let widthAfterStyle = + getComputedStyle(CANVAS).getPropertyValue("width").slice(0, -2);
@@ -24,6 +31,9 @@ function drawCircle(x, y, radius, color) {
     CTX.fill();
     
     CTX.closePath();
+
+    canvasData = canvas.toDataURL();
+    DOWNLOAD_LINK.href = canvasData;
 }
 
 function getRandomHexColor() {
@@ -46,8 +56,7 @@ CANVAS.addEventListener("mousedown", (event) => {
 
     drawCircle(x, y, radius, getRandomHexColor());
 });
-
-
+ 
 document.addEventListener("wheel", (event) => {
 
     if(event.deltaY < 0) {
@@ -55,10 +64,39 @@ document.addEventListener("wheel", (event) => {
         
 
     } else {
-        if(radius - 1 != -1) {
+        if(radius != 0) {
             radius = radius - 10;
         }
     }
 
     RADIUS_DISPLAY.innerText = "Taille du cercle : " + radius + "px";
+});
+
+CLEAR_BUTTON.addEventListener("click", (event) => {
+
+    let userConfirmation = confirm("Voulez-vous vraiment effacer la toile ?");
+
+    if(userConfirmation) {
+        CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
+    }    
+});
+
+DOWNLOAD_BUTTON.addEventListener("click", (event) => {
+    DOWNLOAD_LINK.click();
+});
+
+PLUS_BUTTON.addEventListener("click", () => {
+    radius = radius + 10;
+    RADIUS_DISPLAY.innerText = "Taille du cercle : " + radius + "px";
+});
+
+MINUS_BUTTON.addEventListener("click", () => {
+    if(radius != 0) {
+        radius = radius - 10;
+        RADIUS_DISPLAY.innerText = "Taille du cercle : " + radius + "px";
+    }
+});
+
+document.addEventListener("dblclick", (event) => {
+    EventSource.preventDefault();
 });
