@@ -129,12 +129,6 @@ main {
     font-family: "Roboto", sans-serif;
 }
 
-.left-icon {
-    height: 5vh;
-    margin-right: 1vw;
-    transform: translateY(2vh);
-}
-
 .main-container {
     width: 50vw;
     padding: 1vw;
@@ -150,19 +144,6 @@ main {
 
 .main-container > ul {
     font-family: "Roboto", sans-serif;
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-}
-  
-::-webkit-scrollbar-thumb {
-    background: gray;
-    border-radius: 30px;
-}
-  
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
 }
 
 
@@ -185,5 +166,44 @@ main {
 
     to {
         transform: translateX(0);
+    }
+}
+
+@media screen and (max-width: 1024px) { 
+
+    body {
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    h1 {
+        font-size: 2em;
+        text-align: center;
+        font-family: 'Sora', sans-serif;
+    } 
+
+    nav {
+        height: auto;
+    }
+
+    #left-container {
+        width: 98vw;
+        padding: 3vh;
+    }
+
+    #left-container > * {
+        animation: 1s slide-from-top;
+    }
+
+    #right-side {
+        height: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    .main-container {
+        width: 80vw;
+
     }
 }
