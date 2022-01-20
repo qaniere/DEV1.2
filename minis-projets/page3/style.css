@@ -1,0 +1,48 @@
+body {
+    height: 98vh;
+    overflow: hidden;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    user-select: none; /* Prevents title and span to be selected when double click on the canva */
+    background: linear-gradient(to bottom, #396afc, #2948ff);
+}
+
+canvas {
+    height: 80vh;
+    width: 80vw;
+
+    position: relative;
+
+    background-color: white;
+    border: 3px solid black;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+h1 {
+    margin: 0;
+    width: 100%;
+
+    font-size: 4em;
+    text-align: center;
+    font-family: "Sora", sans-serif;
+}
+
+span {
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    font-family: "Roboto", sans-serif;
+}
+
+#span-container {
+    position: absolute;
+    height: 80vh;
+    width: 80vw;
+    top: 17vh;
+    margin-left: 2vw;
+
+    pointer-events: none;
+}
