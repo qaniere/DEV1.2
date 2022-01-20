@@ -84,8 +84,8 @@ main {
     align-items: center;
     justify-content: center;
 
-    height: 30vh;
-    width: 30vh;
+    height: 28vh;
+    width: 28vh;
     background-color: #f4f4ec;
 
     border-radius: 50%;
@@ -93,7 +93,7 @@ main {
 }
 
 #profile-picture {
-    height: 28vh;
+    height: 26vh;
     border-radius: 50%;
 }
 
