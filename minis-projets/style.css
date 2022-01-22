@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    background-color: #2980b9;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 4em;
+    font-family: "Sora", sans-serif;
+    
+}
+
+span {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: "Roboto", sans-serif;
+}
+
+ul {
+    font-size: 1.5em;
+    font-family: "Roboto", sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
