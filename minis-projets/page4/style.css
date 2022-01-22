@@ -5,7 +5,11 @@ body {
     align-content: flex-start;
     justify-content: center;
 
-    background: linear-gradient(#0f9b0f, #4df200);
+    background-color: #0f9b0f;
+}
+
+body > * {
+    animation: 1s slide-from-top;
 }
 
 h1 {
@@ -25,13 +29,47 @@ span {
 }
 
 table {
+    position: relative;
+    background: url("./sprites/background.png");
+
+    border: 3px solid black;
     border-collapse: collapse;
-    background-color: white;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 td {
     height: 1.5em;
     width: 1.5em;
 
-    border: 0px solid black;
+    background-position: center;
+    background-size: contain;
+
+}
+
+
+#start-menu {
+    top: 50vh;
+    position: absolute;
+    font-family: "Roboto", sans-serif;
+}
+
+#game-over-screen {
+    top: 40vh;
+    display: none;
+    position: absolute;
+    font-family: "Roboto", sans-serif;
+}
+
+
+@keyframes slide-from-top {
+    
+    from {
+        opacity: 0;
+        transform: translateY(-30vh);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

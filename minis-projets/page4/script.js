@@ -1,5 +1,9 @@
 const TABLE = document.getElementById("game");
 const SCORE_DISPLAY = document.getElementById("score-display");
+const SCORE_UP = document.getElementById("score-up-sound");
+const GAME_OVER_SOUND = document.getElementById("game-over-sound");
+const START_MENU = document.getElementById("start-menu");
+const GAME_OVER_SCREEN = document.getElementById("game-over-screen");
 
 const COLUMS = 20; //Coordinates X
 const LINES = 20; //Coordinates Y
@@ -49,10 +53,26 @@ function randint(min, max) {
  *  
  * @param {int} x The x coordinate of the case - Must be positive and less than "COLUMS".
  * @param {int} y The y coordinate of the case   - Must be positive  and less than "LINES".
- * @param {string} color The color that will be filling the case - Must be a valid css color.
+ * @param {string} content The color or the image that will be filling the case - Must be a valid css color if is a color.
+ * @param {boolean} isImage True if the content is a image.
  */
-function fillCase(x, y, color) {
-    document.getElementById(x + "-" + y).style.backgroundColor = color;
+function fillCase(x, y, content, isImage) {
+
+    if(isImage) {
+        document.getElementById(x + "-" + y).style.backgroundImage = "url(" + content + ")";
+    } else {
+        document.getElementById(x + "-" + y).style.backgroundColor = content;
+    }
+}
+
+/**
+ * This function fill clear the image of the given case
+ *  
+ * @param {int} x The x coordinate of the case - Must be positive and less than "COLUMS".
+ * @param {int} y The y coordinate of the case   - Must be positive  and less than "LINES".
+ */
+function clearCaseImage(x, y) {
+    document.getElementById(x + "-" + y).style.backgroundImage = "none";
 }
 
 /**
@@ -64,6 +84,7 @@ function fillCase(x, y, color) {
 function updateScore(adding, value){
 
     if(adding) {
+        SCORE_UP.play();
         score += value;
 
     } else {
@@ -79,7 +100,7 @@ function updateScore(adding, value){
 function increaseSnake() {
     snakeLenght++;
     snakePosition[snakeLenght] = previousPosition[snakeLenght - 1]; //Getting the location of the tail of the snake
-    fillCase(snakePosition[snakeLenght][0], snakePosition[snakeLenght][1], "green");
+    fillCase(snakePosition[snakeLenght][0], snakePosition[snakeLenght][1], "green", false);
 }
 
 /**
@@ -108,7 +129,7 @@ function checkCollision(element, padding) {
  */
 function clearSnake() {
     for(i = 0; i < snakeLenght + 1; i++) {
-        fillCase(snakePosition[i][0], snakePosition[i][1], "white");
+        fillCase(snakePosition[i][0], snakePosition[i][1], "transparent", false);
     } 
 }
 
@@ -190,7 +211,7 @@ function updateTable() {
     if(!gameOver) {
     //If the player didn't loose the game
 
-        fillCase(snakePosition[0][0], snakePosition[0][1], "green");
+        fillCase(snakePosition[0][0], snakePosition[0][1], "green", false);
         //Drawing the head of the snake
 
         for(i = 1; i < snakeLenght + 1; i++) {
@@ -198,7 +219,7 @@ function updateTable() {
             snakePosition[i] = JSON.parse(JSON.stringify(previousPosition[i - 1])); 
             //The tail of the snake will just take the previous place of the previous element
     
-            fillCase(snakePosition[i][0], snakePosition[i][1], "green");
+            fillCase(snakePosition[i][0], snakePosition[i][1], "green", false);
             //Drawing the snake part on the game table
         }
     
@@ -216,7 +237,7 @@ function updateTable() {
             }
     
             isFruitPresent = true;
-            fillCase(fruitPosition[0][0], fruitPosition[0][1], "red");
+            fillCase(fruitPosition[0][0], fruitPosition[0][1], "'./sprites/apple.png'", true);
             
 
         } else if(fruitPosition[0][0] == snakePosition[0][0] && fruitPosition[0][1] == snakePosition[0][1]) {
@@ -225,12 +246,14 @@ function updateTable() {
             updateScore(true, 1);
             increaseSnake();
             isFruitPresent = false;
+            clearCaseImage(fruitPosition[0][0], fruitPosition[0][1]);
         }
 
     } else {
     //If the snake collided with the wall or itself
 
-        alert("Perdu !");
+        GAME_OVER_SOUND.play();
+        GAME_OVER_SCREEN.style.display = "block";
         gameStarted = false;
         clearInterval(loop);
     }
@@ -244,13 +267,15 @@ function startGame() {
     //If a game was previously launched
 
         clearSnake();
-        fillCase(fruitPosition[0][0], fruitPosition[0][1], "white");
+        clearCaseImage(fruitPosition[0][0], fruitPosition[0][1]);
+
+        GAME_OVER_SCREEN.style.display = "none";
     }
 
     
     let startX = randint(0, LINES);
     let startY = randint(0, COLUMS);
-    fillCase(startX, startY, "green");
+    fillCase(startX, startY, "green", false);
     //Setting a random spawn point for the snake
 
     snakeLenght = 0;
@@ -269,6 +294,7 @@ function startGame() {
     gameStarted = true;
     loop = setInterval(updateTable, SPEED);
     gameCount++;
+    START_MENU.style.display = "none";
 }
 
 //This callback is executed when any key is pressed while the page have the focus
