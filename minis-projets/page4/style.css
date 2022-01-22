@@ -1,0 +1,37 @@
+body {
+    height: 98vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+
+    background: linear-gradient(#0f9b0f, #4df200);
+}
+
+h1 {
+    width: 100%;
+
+    font-size: 4em;
+    text-align: center;
+    font-family: "Sora", sans-serif;
+}
+
+span {
+    width: 100%;
+    
+    font-size: 2em;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: white;
+}
+
+td {
+    height: 1.5em;
+    width: 1.5em;
+
+    border: 0px solid black;
+}
