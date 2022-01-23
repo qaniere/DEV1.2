@@ -136,6 +136,9 @@ a:hover {
 
     .text-container {
         width: 70%;
-        text-align: justify;
+    }
+
+    .text-container > h2 {
+        font-size: 1.5em;
     }
 }

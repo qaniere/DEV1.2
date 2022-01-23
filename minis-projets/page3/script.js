@@ -1,6 +1,5 @@
 const CANVAS = document.getElementById("canvas");
 const CTX = canvas.getContext("2d");  
-const DPI = window.devicePixelRatio; //The resolution of screen
 
 const RADIUS_DISPLAY = document.getElementById("radius-display");
 const CLEAR_BUTTON = document.getElementById("clear-button");
@@ -16,8 +15,8 @@ let heightAfterStyle = + getComputedStyle(CANVAS).getPropertyValue("height").sli
 let widthAfterStyle = + getComputedStyle(CANVAS).getPropertyValue("width").slice(0, -2);
 //These lines fetch the size of the canvas after css transformations
 
-CANVAS.setAttribute("height", heightAfterStyle * DPI);
-CANVAS.setAttribute("width", widthAfterStyle * DPI);
+CANVAS.setAttribute("height", heightAfterStyle);
+CANVAS.setAttribute("width", widthAfterStyle);
 //The real height and width of the canvas are multiplied by the resolution of the screen
 //in order to prevent blurry draws.
 

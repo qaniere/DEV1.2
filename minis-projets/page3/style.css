@@ -95,11 +95,13 @@ button {
 
     body {
         height: 100vh;
+        align-content: flex-start;
     }
 
     canvas {
         height: 50vh;
         width: 85vw;
+        margin-bottom: 5vh;
     }
 
     button {
@@ -109,6 +111,7 @@ button {
 
     h1 {
         font-size: 2.5em;
+        margin-bottom: 5vh;
     }
 
     span {
@@ -117,7 +120,7 @@ button {
 
 
     #span-container { 
-        top: 22vh;
+        top: 15%;
         height: 50vh;
         width: 80vw;
     }

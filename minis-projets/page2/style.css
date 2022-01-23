@@ -22,9 +22,11 @@ h2 {
 form, #table-container {
     width: 50vw;
  
-    padding: 1vw;
-    border-radius: 10px;
+    padding: 2vw;
     margin-bottom: 5vh;
+    border: 2px solid black;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    background-color: #f4f4ec;
     
     background-color: white;
 }
@@ -54,13 +56,8 @@ td {
 }
 
 
-#table-container {
-    margin-bottom: 27vh;
-}
-
-
 .hash-div {
-    width: 100%vw;
+    width: 100%;
     overflow-x: scroll;
 }
 
@@ -86,7 +83,13 @@ td {
     }
 
     form, #table-container {
-        width: 90vw;
+        width: 85vw;
+        overflow: scroll;
+    }
+
+    td {
+        width: auto;
+        max-width: 25vw;
     }
 
 }
