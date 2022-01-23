@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <title>Snake</title>
     <meta charset="UTF-8">
@@ -17,11 +17,24 @@
     <table id="game">
     </table>
     <div id="start-menu">
-        <h2>Appuyez sur espace pour commencer</h2>
+        <h2 id="start-message-computer">Appuyez sur espace pour commencer</h2>
+        <h2 id="start-message-mobile">Touchez ici pour commencer</h2>
     </div>
     <div id="game-over-screen">
         <h1>Game over !</h1>
-        <h2>Appuyez sur espace pour recommencer</h2>
+        <h2 id="game-over-message-computer">Appuyez sur espace pour recommencer</h2>
+        <h2 id="game-over-message-mobile">Touchez ici pour recommencer</h2>
+    </div>
+    <div id="button-container">
+        <div id="up-arrow-container">
+            <img id="up-arrow" src="./sprites/arrow.png" class="arrow">
+        </div>
+        <div id="left-right-arrows-container">
+            <img id="left-arrow" src="./sprites/arrow.png" class="arrow">
+            <img id="right-arrow" src="./sprites/arrow.png" class="arrow">
+        </div>
+        <img id="down-arrow" src="./sprites/arrow.png" class="arrow">
+
     </div>
     <audio id="score-up-sound" src="sounds/score-up.mp3"></audio>
     <audio id="game-over-sound" src="sounds/game-over.mp3"></audio>

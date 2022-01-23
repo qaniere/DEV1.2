@@ -1,5 +1,4 @@
 body {
-    height: 98vh;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
@@ -42,13 +41,13 @@ td {
 
     background-position: center;
     background-size: contain;
-
 }
 
 
 #start-menu {
     top: 50vh;
     position: absolute;
+    pointer-events: none;
     font-family: "Fira Code", sans-serif;
 }
 
@@ -56,11 +55,20 @@ td {
     top: 40vh;
     display: none;
     position: absolute;
+    pointer-events: none;
     font-family: "Fira Code", sans-serif;
 }
 
 #game-over-screen > h1 {
     font-size: 3em;
+}
+
+#button-container {
+    display: none;
+}
+
+#start-message-mobile, #game-over-message-mobile {
+    display: none;
 }
 
 
@@ -69,4 +77,99 @@ td {
     src: url("./fonts/Gameplay.ttf"),
          url("./fonts/Gameplay.woff"),
          url("./fonts/Gameplay.otf");
+}
+
+
+@media screen and (max-width: 500px) { 
+ 
+    h1 {
+        margin: 0;
+        margin-top: 1vh;
+        margin-bottom: 2vh;
+    }
+    
+    td {
+        width: 10px;
+        height: 10px;
+    }
+
+    h2 {
+          
+        width: 80%;
+        font-size: 1em;
+        text-align: center;
+
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    table { 
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+
+    #start-message-mobile, #game-over-message-mobile {
+        display: block;
+    }
+
+    #start-message-computer, #game-over-message-computer {
+        display: none;
+    }
+    
+    #start-menu {
+        top: 40%;
+    }
+
+    #game-over-screen {
+        top: 30%;
+    }
+
+    #game-over-screen > h1 {
+        
+        font-size: 1.7em;
+    }
+
+    #button-container {
+        width: 100%;
+        margin-top: 2vh;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        
+    }
+
+    #up-arrow-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        margin-bottom: -3vh;
+    }
+
+    #left-right-arrows-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #left-arrow {
+        transform: rotate(270deg);
+        margin-right: 3vw;
+    }
+
+    #right-arrow {
+        transform: rotate(90deg);
+        margin-left: 3vw;
+    }
+
+    #down-arrow {
+        margin-top: -3vh;
+        transform: rotate(180deg);
+    }
+
+    .arrow {
+        height: 10vh;
+    }
 }

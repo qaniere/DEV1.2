@@ -5,6 +5,11 @@ const GAME_OVER_SOUND = document.getElementById("game-over-sound");
 const START_MENU = document.getElementById("start-menu");
 const GAME_OVER_SCREEN = document.getElementById("game-over-screen");
 
+const UP_ARROW = document.getElementById("up-arrow");
+const LEFT_ARROW = document.getElementById("left-arrow");
+const RIGHT_ARROW = document.getElementById("right-arrow");
+const DOWN_ARROW = document.getElementById("down-arrow");
+
 const COLUMS = 20; //Coordinates X
 const LINES = 20; //Coordinates Y
 const SPEED = 200; //The delay before game table actualisation
@@ -272,6 +277,8 @@ function startGame() {
         GAME_OVER_SCREEN.style.display = "none";
     }
 
+    direction = "n";
+
     
     let startX = randint(0, LINES);
     let startY = randint(0, COLUMS);
@@ -319,4 +326,45 @@ document.addEventListener("keyup", (event) => {
         startGame();
     }
 
+});
+
+//This callback is executed when the document is double clicked
+document.addEventListener("dblclick", (event) => {
+    event.preventDefault();
+    //On computer devices, this does nothing but on mobile devices
+    //it prevent automatic zoom that can't be really anoying for
+    //user
+});
+
+
+//This callback is executed when the game table is clicked
+TABLE.addEventListener("click", (event) => {
+
+    if(!gameStarted) {
+        startGame();
+    }
+});
+
+//This callback is executed when the up arrow is clicked (mobile only)
+UP_ARROW.addEventListener("click", (event) => {
+
+    direction = "n";
+});
+
+//This callback is executed when the left arrow is clicked (mobile only)
+LEFT_ARROW.addEventListener("click", (event) => {
+
+    direction = "w";
+});
+
+//This callback is executed when the right arrow is clicked (mobile only)
+RIGHT_ARROW.addEventListener("click", (event) => {
+
+    direction = "e";
+});
+
+//This callback is executed when the down arrow is clicked (mobile only)
+DOWN_ARROW.addEventListener("click", (event) => {
+
+    direction = "s";
 });
