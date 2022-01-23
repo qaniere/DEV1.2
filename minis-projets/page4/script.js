@@ -100,7 +100,7 @@ function updateScore(adding, value){
 function increaseSnake() {
     snakeLenght++;
     snakePosition[snakeLenght] = previousPosition[snakeLenght - 1]; //Getting the location of the tail of the snake
-    fillCase(snakePosition[snakeLenght][0], snakePosition[snakeLenght][1], "green", false);
+    fillCase(snakePosition[snakeLenght][0], snakePosition[snakeLenght][1], "white", false);
 }
 
 /**
@@ -211,7 +211,7 @@ function updateTable() {
     if(!gameOver) {
     //If the player didn't loose the game
 
-        fillCase(snakePosition[0][0], snakePosition[0][1], "green", false);
+        fillCase(snakePosition[0][0], snakePosition[0][1], "white", false);
         //Drawing the head of the snake
 
         for(i = 1; i < snakeLenght + 1; i++) {
@@ -219,7 +219,7 @@ function updateTable() {
             snakePosition[i] = JSON.parse(JSON.stringify(previousPosition[i - 1])); 
             //The tail of the snake will just take the previous place of the previous element
     
-            fillCase(snakePosition[i][0], snakePosition[i][1], "green", false);
+            fillCase(snakePosition[i][0], snakePosition[i][1], "white", false);
             //Drawing the snake part on the game table
         }
     
@@ -275,7 +275,7 @@ function startGame() {
     
     let startX = randint(0, LINES);
     let startY = randint(0, COLUMS);
-    fillCase(startX, startY, "green", false);
+    fillCase(startX, startY, "white", false);
     //Setting a random spawn point for the snake
 
     snakeLenght = 0;
