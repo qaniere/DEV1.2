@@ -57,6 +57,12 @@ a:hover {
 }
 
 
+#block-5 {
+    opacity: 0;
+    animation-delay: 1.25s;
+}
+
+
 .project-container {
     width: 50vw;
     padding: 1vw;
