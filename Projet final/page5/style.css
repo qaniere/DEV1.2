@@ -11,23 +11,24 @@ h1 {
 }
 
 table {
-    border: 3px solid white;
+    user-select: none;
+    border: 2px solid white;
     border-collapse: collapse;
 }
 
 td {
     padding: 0;
-    width: 2.5em;
-    height: 2.5em;
+    width: 3.1em;
+    height: 3.1em;
 
     text-align: center;
 
     background-size: cover;
+    background-color: black;
     background-repeat: no-repeat;
-    background-image: url("./sprites/ground.png");
 }
 
-#player {
+img {
     margin: 0;
-    height: 2.2em;
+    height: 2.8em;
 }
