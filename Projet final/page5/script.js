@@ -4,21 +4,23 @@ let playerPosition = [undefined, undefined]; //x, y
 let playerDirection = "down"; 
 
 let maxX = 12;
-let maxY = 12;
+let maxY = 13;
+
+let targetsPositions = [];
 
 const LEVEL = [
-    [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-    [" ", "C", "H", "H", "H", "H", "H", "H", "H", "H", "C", " "],
-    [" ", "V", "G", "G", "G", "G", "P", "G", "G", "G", "V", " "],
-    [" ", "V", "G", "G", "G", "G", "G", "G", "G", "G", "V", " "],
-    [" ", "V", "G", "G", "G", "G", "G", "G", "G", "G", "V", " "],
-    [" ", "V", "G", "G", "G", "G", "G", "G", "G", "G", "V", " "],
-    [" ", "V", "G", "G", "G", "G", "B", "T", "G", "G", "V", " "],
-    [" ", "V", "G", "G", "B", "T", "G", "G", "G", "G", "V", " "],
-    [" ", "V", "G", "G", "G", "G", "B", "T", "G", "G", "V", " "],
-    [" ", "V", "G", "G", "G", "G", "G", "G", "G", "G", "V", " "],
-    [" ", "C", "H", "H", "H", "H", "H", "H", "H", "H", "C", " "],
-    [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+    [" ", "C", "H", "H", "H", "H", "H", "H", "H", "H", "H", "C", " "],
+    [" ", "V", "G", "G", "G", "G", "P", "G", "G", "G", "G", "V", " "],
+    [" ", "V", "G", "G", "G", "G", "G", "G", "G", "G", "G", "V", " "],
+    [" ", "V", "G", "G", "G", "G", "G", "G", "G", "G", "G", "V", " "],
+    [" ", "V", "G", "G", "G", "G", "B", "G", "G", "G", "G", "V", " "],
+    [" ", "V", "G", "G", "B", "G", "G", "G", "B", "G", "G", "V", " "],
+    [" ", "V", "G", "G", "G", "G", "T", "G", "G", "G", "G", "V", " "],
+    [" ", "V", "G", "G", "T", "G", "G", "G", "T", "G", "G", "V", " "],
+    [" ", "V", "G", "G", "G", "G", "G", "G", "G", "G", "G", "V", " "],
+    [" ", "C", "H", "H", "H", "H", "H", "H", "H", "H", "H", "C", " "],
+    [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 ]
 
 // C = Corner, to link vertical and horizontal wall - Player cant walk here or push it
@@ -27,7 +29,8 @@ const LEVEL = [
 // G = Ground - Player can walk on it but he cant push it
 // B = Box - Player cant walk here but he can push push it
 // T = Target, Where the player should push the box - Player can walk on it but he cant push it
-// P = Player
+// F = Filled target, a box is placed here - Player cant walk on it but he can push it
+// P = Player - Dont need to be update, considered as ground after
 
 
 //Drawing the game table
@@ -63,9 +66,21 @@ for(x = 0; x < maxX; x++) {
 
         } else if(LEVEL[x][y] == "T") {
             cell.style.backgroundImage = "url('./sprites/target.png')";
+            targetsPositions.push([x, y])
 
         }
     }
+}
+
+function wasTarget(x, y) {
+
+    for(i = 0 ; i < targetsPositions.length; i++) {
+        if(targetsPositions[i][0] == x && targetsPositions[i][1] == y) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
@@ -115,8 +130,56 @@ document.addEventListener("keydown", (event) => {
     //Change the direction of the player before he moves
 
     if(checkColision(potentialPosition[0], potentialPosition[1])) {
-            //Collision play sound later
-            console.log
+            
+        if(LEVEL[potentialPosition[0]][potentialPosition[1]] == "B" || LEVEL[potentialPosition[0]][potentialPosition[1]] == "F") {
+
+            let boxMoved = false;
+            let boxPosition = [undefined, undefined]
+
+            if(playerDirection == "down" && !checkColision(potentialPosition[0] + 1, potentialPosition[1])) {
+                boxPosition = [potentialPosition[0] + 1, potentialPosition[1]];
+                boxMoved = true
+
+            } else if(playerDirection == "up" && !checkColision(potentialPosition[0] - 1, potentialPosition[1])) {
+                
+                boxPosition = [potentialPosition[0] - 1, potentialPosition[1]];
+                boxMoved = true
+
+            } else if(playerDirection == "left" && !checkColision(potentialPosition[0], potentialPosition[1] - 1)) {
+                boxPosition = [potentialPosition[0], potentialPosition[1] - 1];
+                boxMoved = true
+
+            } else if(playerDirection == "right" && !checkColision(potentialPosition[0], potentialPosition[1] + 1)) {
+                boxPosition = [potentialPosition[0], potentialPosition[1] + 1];
+                boxMoved = true
+
+            }
+
+            if(boxMoved) {
+                //Changing the position of the box on the matrix and drawing it
+
+                if(wasTarget(potentialPosition[0], potentialPosition[1])) {
+                    LEVEL[potentialPosition[0]][potentialPosition[1]] = "T";
+
+                } else {
+                    LEVEL[potentialPosition[0]][potentialPosition[1]] = "G";
+                }
+                
+                if(LEVEL[boxPosition[0]][boxPosition[1]] == "T") {
+                    LEVEL[boxPosition[0]][boxPosition[1]] = "F";
+                    drawImage(boxPosition[0], boxPosition[1], "box-in");
+                    
+                } else {
+                    LEVEL[boxPosition[0]][boxPosition[1]] = "B";
+                    drawImage(boxPosition[0], boxPosition[1], "box");
+                }
+
+                emptyCase(playerPosition[0], playerPosition[1]);
+                playerPosition = JSON.parse(JSON.stringify(potentialPosition));
+                drawImage(potentialPosition[0], playerPosition[1], "player-" + playerDirection);
+                //Change the player position
+            }
+        }
 
     } else {
         emptyCase(playerPosition[0], playerPosition[1])
