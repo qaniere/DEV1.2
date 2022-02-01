@@ -8,6 +8,9 @@ let maxY = 13;
 
 let targetsPositions = [];
 
+let targetsFilled = 0;
+let totalTargets = 0;
+
 const LEVEL = [
     [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     [" ", "C", "H", "H", "H", "H", "H", "H", "H", "H", "H", "C", " "],
@@ -67,10 +70,13 @@ for(x = 0; x < maxX; x++) {
         } else if(LEVEL[x][y] == "T") {
             cell.style.backgroundImage = "url('./sprites/target.png')";
             targetsPositions.push([x, y])
+            totalTargets++;
 
         }
     }
 }
+
+updateScoreDisplay();
 
 function wasTarget(x, y) {
 
@@ -82,7 +88,6 @@ function wasTarget(x, y) {
 
     return false;
 }
-
 
 function drawImage(x, y, image) {
     document.getElementById(x + "-" + y).innerHTML = `<img id='player' src=./sprites/${image}.png>`;
@@ -101,6 +106,10 @@ function checkColision(x, y) {
     }
 
     return false;
+}
+
+function updateScoreDisplay() {
+    document.getElementById("display-var").innerHTML = `${targetsFilled}/${totalTargets}`;
 }
 
 
@@ -160,6 +169,7 @@ document.addEventListener("keydown", (event) => {
 
                 if(wasTarget(potentialPosition[0], potentialPosition[1])) {
                     LEVEL[potentialPosition[0]][potentialPosition[1]] = "T";
+                    targetsFilled--;
 
                 } else {
                     LEVEL[potentialPosition[0]][potentialPosition[1]] = "G";
@@ -168,11 +178,14 @@ document.addEventListener("keydown", (event) => {
                 if(LEVEL[boxPosition[0]][boxPosition[1]] == "T") {
                     LEVEL[boxPosition[0]][boxPosition[1]] = "F";
                     drawImage(boxPosition[0], boxPosition[1], "box-in");
+                    targetsFilled++;
                     
                 } else {
                     LEVEL[boxPosition[0]][boxPosition[1]] = "B";
                     drawImage(boxPosition[0], boxPosition[1], "box");
                 }
+
+                updateScoreDisplay()
 
                 emptyCase(playerPosition[0], playerPosition[1]);
                 playerPosition = JSON.parse(JSON.stringify(potentialPosition));
