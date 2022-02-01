@@ -6,8 +6,12 @@ body {
 }
 
 h1 {
-    width: 100%;
+    margin: 0;
+    width: 100%;  
+    font-size: 3.25em;
     text-align: center;
+    letter-spacing: 1.25px;
+    font-family: "Heavy Heap";
 }
 
 table {
@@ -36,5 +40,19 @@ img {
 
 #display {
     width: 100%;
+    margin-bottom: 2vh;
+
+    font-size: 1.5em;
     text-align: center;
+    font-family: "Coolvetica";
+}
+
+@font-face {
+    font-family: "Heavy Heap";
+    src: url("./fonts/heavy\ heap.ttf");
+}
+
+@font-face {
+    font-family: "Coolvetica";
+    src: url("./fonts/coolvetica\ rg.otf");
 }
