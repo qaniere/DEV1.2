@@ -47,6 +47,35 @@ img {
     font-family: "Coolvetica";
 }
 
+#game-container {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#start-menu, #victory-screen {
+    width: 50vw;
+    padding: 1vw;
+    margin-top: 4vh;
+
+    border: 2px solid black;
+    background-color: #f4f4ec;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#start-menu > h2 {
+    font-family: "Coolvetica";
+}
+
+#start-menu > h2 { 
+    font-family: sans-serif;
+}
+
+#victory-screen  {
+    display: none;
+}
+
+
 @font-face {
     font-family: "Heavy Heap";
     src: url("./fonts/heavy\ heap.ttf");
