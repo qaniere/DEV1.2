@@ -164,7 +164,17 @@ document.addEventListener("keydown", (event) => {
             playerDirection = "right"
             potentialPosition[1] += 1;
     
-        } 
+        } else if(event.key === "r") {
+            let userConfirmation = confirm("Voulez-vous vraiment remettre à zéro ce niveau ?");
+
+            if(userConfirmation) {
+                COLLISION_AUDIO.play();
+                GAME_TABLE.innerHTML = "";
+                startGame();
+            }
+
+            return; //Exit the function without go any further
+        }
     
         drawImage(playerPosition[0], playerPosition[1], "player-" + playerDirection);
         //Change the direction of the player before he moves
