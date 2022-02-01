@@ -1,5 +1,10 @@
 const GAME_TABLE = document.getElementById("game-table");
 
+const SUCCESS_AUDIO = document.getElementById("success-sound");
+const COLLISION_AUDIO = document.getElementById("collision-sound");
+const BOX_SLIDE_AUDIO = document.getElementById("box-slide-sound");
+const VICTORY_AUDIO = document.getElementById("victory-audio");
+
 let playerPosition = [undefined, undefined]; //x, y
 let playerDirection = "down"; 
 
@@ -178,21 +183,40 @@ document.addEventListener("keydown", (event) => {
                 if(LEVEL[boxPosition[0]][boxPosition[1]] == "T") {
                     LEVEL[boxPosition[0]][boxPosition[1]] = "F";
                     drawImage(boxPosition[0], boxPosition[1], "box-in");
+
                     targetsFilled++;
+                    SUCCESS_AUDIO.play();
                     
                 } else {
                     LEVEL[boxPosition[0]][boxPosition[1]] = "B";
                     drawImage(boxPosition[0], boxPosition[1], "box");
                 }
 
+                BOX_SLIDE_AUDIO.play();
                 updateScoreDisplay()
+
+                if(targetsFilled === totalTargets) {
+                    VICTORY_AUDIO.play();
+                    alert("Niveau complété !");
+                }
 
                 emptyCase(playerPosition[0], playerPosition[1]);
                 playerPosition = JSON.parse(JSON.stringify(potentialPosition));
                 drawImage(potentialPosition[0], playerPosition[1], "player-" + playerDirection);
                 //Change the player position
+
+
+            } else {
+            //Box cant move
+
+                COLLISION_AUDIO.play();
             }
-        }
+
+        }else {
+            //Player collidded with something else
+
+                COLLISION_AUDIO.play();
+            }
 
     } else {
         emptyCase(playerPosition[0], playerPosition[1])
