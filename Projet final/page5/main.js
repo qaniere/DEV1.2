@@ -138,7 +138,8 @@ function checkColision(x, y) {
 }
 
 function updateScoreDisplay() {
-    document.getElementById("display-var").innerHTML = `${targetsFilled}/${totalTargets}`;
+    document.getElementById("box-var").innerHTML = `${targetsFilled}/${totalTargets}`;
+    document.getElementById("level-var").innerHTML = `${currentLevel + 1}/${LEVELS.length}`;
 }
 
 document.addEventListener("keydown", (event) => {
