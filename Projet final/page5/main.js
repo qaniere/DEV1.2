@@ -8,8 +8,14 @@ const SUCCESS_AUDIO = document.getElementById("success-sound");
 const COLLISION_AUDIO = document.getElementById("collision-sound");
 const BOX_SLIDE_AUDIO = document.getElementById("box-slide-sound");
 const VICTORY_AUDIO = document.getElementById("victory-audio");
+const MUSIC = document.getElementById("music")
+
+BOX_SLIDE_AUDIO.volume = 0.5;
+SUCCESS_AUDIO.volume = 0.5;
 
 let gameStarted = false;
+let musicOn = true;
+let sfxOn = true;
 
 let playerPosition = [undefined, undefined]; //x, y
 let playerDirection = "down"; 
@@ -37,6 +43,9 @@ function nextLevel() {
 
     if(currentLevel >= LEVELS.length) {
         gameStarted = false;
+        MUSIC.pause();
+        MUSIC.currentTime = 0;
+
         GAME_CONTAINER.style.display = "none";
         DISPLAY_CONTAINER.style.display = "none";
         VICTORY_SCREEN.style.display = "block";
@@ -50,6 +59,11 @@ function startGame() {
 
     GAME_CONTAINER.style.display = "flex";
     DISPLAY_CONTAINER.style.display = "block";
+    if(musicOn) {
+        MUSIC.play();
+    }
+
+    MUSIC.volume = 1;
     gameStarted = true;
 
     playerPosition = [undefined, undefined]; //x, y
@@ -171,7 +185,9 @@ document.addEventListener("keydown", (event) => {
             let userConfirmation = confirm("Voulez-vous vraiment remettre à zéro ce niveau ?");
 
             if(userConfirmation) {
-                COLLISION_AUDIO.play();
+                if(sfxOn) {
+                    COLLISION_AUDIO.play();
+                }
                 GAME_TABLE.innerHTML = "";
                 startGame();
             }
@@ -224,14 +240,18 @@ document.addEventListener("keydown", (event) => {
                         drawImage(boxPosition[0], boxPosition[1], "box-in");
     
                         targetsFilled++;
-                        SUCCESS_AUDIO.play();
-                        
+                        if(sfxOn) {
+                            SUCCESS_AUDIO.play();
+                        }
+                                                
                     } else {
                         level[boxPosition[0]][boxPosition[1]] = "B";
                         drawImage(boxPosition[0], boxPosition[1], "box");
                     }
     
-                    BOX_SLIDE_AUDIO.play();
+                    if(sfxOn) {
+                        BOX_SLIDE_AUDIO.play();
+                    }
                     updateScoreDisplay()
         
                     emptyCase(playerPosition[0], playerPosition[1]);
@@ -240,19 +260,26 @@ document.addEventListener("keydown", (event) => {
                     //Change the player position
 
                     if(targetsFilled === totalTargets) {
-                        VICTORY_AUDIO.play();
+                        if(sfxOn) {
+                            VICTORY_AUDIO.play();
+                        }
+                        
                         nextLevel();
                     }
     
     
                 } else {
                 //Box cant move
-                    COLLISION_AUDIO.play();
+                    if(sfxOn) {
+                        COLLISION_AUDIO.play();
+                    }
                 }
     
             }else {
                 //Player collidded with something else
-                    COLLISION_AUDIO.play();
+                    if(sfxOn) {
+                        COLLISION_AUDIO.play();
+                    }
                 }
     
         } else {
@@ -271,4 +298,31 @@ document.getElementById("replay-button").addEventListener("click", () => {
     currentLevel = -1;
     VICTORY_SCREEN.style.display = "none";
     nextLevel();
+});
+
+document.getElementById("mute-play-music-button").addEventListener("click", () => {
+
+    if(musicOn) {
+        musicOn = false;
+        MUSIC.pause();
+        MUSIC.currentTime = 0;
+        document.getElementById("mute-play-music-button").innerText = "Réactiver la musique";
+        
+    } else {
+        musicOn = true;
+        MUSIC.play();
+        document.getElementById("mute-play-music-button").innerText = "Couper la musique";
+    }
+});
+
+document.getElementById("mute-play-sfx-button").addEventListener("click", () => {
+
+    if(sfxOn) {
+        sfxOn = false;
+        document.getElementById("mute-play-sfx-button").innerText = "Réactiver les effets sonores";
+        
+    } else {
+        sfxOn = true;
+        document.getElementById("mute-play-sfx-button").innerText = "Couper les effets sonores";
+    }
 });
