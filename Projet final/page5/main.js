@@ -326,3 +326,36 @@ document.getElementById("mute-play-sfx-button").addEventListener("click", () => 
         document.getElementById("mute-play-sfx-button").innerText = "Couper les effets sonores";
     }
 });
+
+document.getElementById("restart-button").addEventListener("click", () => {
+    let userConfirmation = confirm("Voulez-vous vraiment remettre à zéro ce niveau ?");
+
+    if(userConfirmation) {
+        if(sfxOn) {
+            COLLISION_AUDIO.play();
+        }
+
+        GAME_TABLE.innerHTML = "";
+        startGame();
+    }
+});
+
+document.getElementById("menu-button").addEventListener("click", () => {
+    let userConfirmation = confirm("Voulez-vous vraiment retourner au menu ?");
+
+    if(userConfirmation) {
+
+        if(musicOn) {
+            MUSIC.pause();
+            MUSIC.currentTime = 0;
+        }
+
+        currentLevel = -1;
+        GAME_TABLE.innerHTML = "";
+
+        GAME_CONTAINER.style.display = "none";
+        DISPLAY_CONTAINER.style.display = "none";
+        START_MENU.style.display = "block"
+    }
+});
+
