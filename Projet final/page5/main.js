@@ -265,7 +265,7 @@ document.getElementById("start-button").addEventListener("click", () => {
 });
 
 document.getElementById("replay-button").addEventListener("click", () => {
-    currentLevel = 0;
+    currentLevel = -1;
     VICTORY_SCREEN.style.display = "none";
     nextLevel();
 });
