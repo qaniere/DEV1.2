@@ -14,11 +14,41 @@
 <body>
     <h1>Sokoban</h1>
     <div id="game-container">
-        <span id="display">
-            Nombre de caisses bien placées : <span id="box-var">x/x</span > | 
-            Niveau : <span id="level-var">x/x</span>
-        </span>
         <table id="game-table"></table>
+    </div>
+    <div id="display-container">
+        <h2>Statistiques</h2>
+        <ul>
+            <li class="display">Nombre de caisses bien placées : <span id="box-var">x/x</span></li>
+        </ul>
+        <ul>
+            <li class="display">Niveau : <span id="level-var">x/x</span></li>
+        </ul>
+        <ul>
+            <li class="display">Temps écoulé : <span id="time-var">MM:SS</span></li>
+        </ul>
+        <ul>
+            <li class="display">Meilleur temps : <span id="best-time-var">MM:SS</span></li>
+        </ul>
+        <ul>
+            <li class="display">Caisses déplacées : <span id="box-var">XX</span></li>
+        </ul>
+        <ul>
+            <li class="display">Record de déplacements : <span id="best-box-var">XX</span></li>
+        </ul>
+        <h2>Commandes</h2>
+        <div class="button-container">
+            <button>Recommencer le niveau</button>
+        </div>
+        <div class="button-container">
+            <button>Retourner au menu</button>
+        </div>
+        <div class="button-container">
+            <button>Couper la musique</button>
+        </div>
+        <div class="button-container">
+            <button>Couper les effets sonores</button>
+        </div>
     </div>
     <div id="start-menu">
         <h2>Règles du jeu</h2>

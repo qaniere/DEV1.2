@@ -2,6 +2,7 @@ const GAME_TABLE = document.getElementById("game-table");
 const GAME_CONTAINER = document.getElementById("game-container");
 const START_MENU = document.getElementById("start-menu");
 const VICTORY_SCREEN = document.getElementById("victory-screen");
+const DISPLAY_CONTAINER = document.getElementById("display-container");
 
 const SUCCESS_AUDIO = document.getElementById("success-sound");
 const COLLISION_AUDIO = document.getElementById("collision-sound");
@@ -37,6 +38,7 @@ function nextLevel() {
     if(currentLevel >= LEVELS.length) {
         gameStarted = false;
         GAME_CONTAINER.style.display = "none";
+        DISPLAY_CONTAINER.style.display = "none";
         VICTORY_SCREEN.style.display = "block";
 
     } else {
@@ -47,6 +49,7 @@ function nextLevel() {
 function startGame() {
 
     GAME_CONTAINER.style.display = "flex";
+    DISPLAY_CONTAINER.style.display = "block";
     gameStarted = true;
 
     playerPosition = [undefined, undefined]; //x, y
