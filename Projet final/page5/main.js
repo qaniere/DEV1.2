@@ -180,19 +180,19 @@ document.addEventListener("keydown", (event) => {
 
         let potentialPosition = JSON.parse(JSON.stringify(playerPosition))
     
-        if(event.key === "z" || event.key === "ArrowUp") {
+        if(event.key === "z" || event.key == "Z" || event.key === "ArrowUp") {
             playerDirection = "up"
             potentialPosition[0] -= 1;
     
-        } else if(event.key === "s" || event.key === "ArrowDown") {
+        } else if(event.key === "s" || event.key == "S" || event.key === "ArrowDown") {
             playerDirection = "down"
             potentialPosition[0] += 1;
     
-        } else if(event.key === "q" || event.key === "ArrowLeft") {
+        } else if(event.key === "q" || event.key == "Q" || event.key === "ArrowLeft") {
             playerDirection = "left"
             potentialPosition[1] -= 1;
     
-        } else if(event.key === "d" || event.key === "ArrowRight") {
+        } else if(event.key === "d" || event.key == "D" || event.key === "ArrowRight") {
             playerDirection = "right"
             potentialPosition[1] += 1;
     
