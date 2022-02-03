@@ -28,6 +28,9 @@ let targetsPositions = [];
 let targetsFilled = 0;
 let totalTargets = 0;
 
+let movedBoxes = 0;
+let bestMoveBoxes = 0;
+
 let currentLevel = -1;
 let level = [];
 
@@ -76,6 +79,16 @@ function startGame() {
 
     targetsFilled = 0;
     totalTargets = 0;
+
+    movedBoxes = 0;
+
+    if(localStorage.getItem(currentLevel + "bestMovedBoxes") != null) {
+        bestMoveBoxes = localStorage.getItem(currentLevel + "bestMovedBoxes");
+
+    } else {
+        bestMoveBoxes = 0;
+    }
+
 
     level = JSON.parse(JSON.stringify(LEVELS[currentLevel]));
     
@@ -157,6 +170,8 @@ function checkColision(x, y) {
 function updateScoreDisplay() {
     document.getElementById("box-var").innerHTML = `${targetsFilled}/${totalTargets}`;
     document.getElementById("level-var").innerHTML = `${currentLevel + 1}/${LEVELS.length}`;
+    document.getElementById("moved-box-var").innerHTML = movedBoxes;
+    document.getElementById("best-box-var").innerHTML = bestMoveBoxes;
 }
 
 document.addEventListener("keydown", (event) => {
@@ -227,6 +242,8 @@ document.addEventListener("keydown", (event) => {
                 if(boxMoved) {
                     //Changing the position of the box on the matrix and drawing it
     
+                    movedBoxes++;
+
                     if(wasTarget(potentialPosition[0], potentialPosition[1])) {
                         level[potentialPosition[0]][potentialPosition[1]] = "T";
                         targetsFilled--;
@@ -261,6 +278,10 @@ document.addEventListener("keydown", (event) => {
 
                     if(targetsFilled === totalTargets) {
                         if(sfxOn) {
+                            if(bestMoveBoxes < movedBoxes) {
+                                localStorage.setItem(currentLevel + "bestMovedBoxes", movedBoxes);
+                            }
+
                             VICTORY_AUDIO.play();
                         }
                         
