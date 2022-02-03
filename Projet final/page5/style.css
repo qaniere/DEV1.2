@@ -11,7 +11,7 @@ h1 {
     font-size: 3.25em;
     text-align: center;
     letter-spacing: 1.25px;
-    font-family: "Heavy Heap";
+    font-family: "Sora", sans-serif;
 }
 
 table {
@@ -44,7 +44,7 @@ img {
 
     font-size: 1.5em;
     text-align: center;
-    font-family: "Coolvetica";
+    font-family: "Roboto";
 }
 
 #game-container {
@@ -63,25 +63,14 @@ img {
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
-#start-menu > h2 {
-    font-family: "Coolvetica";
+#start-menu > h2, #victory-screen > h2 {
+    font-family: "Sora";
 }
 
-#start-menu > h2 { 
-    font-family: sans-serif;
+#start-menu > p, #victory-screen > p { 
+    font-family: "Roboto", sans-serif;
 }
 
 #victory-screen  {
     display: none;
-}
-
-
-@font-face {
-    font-family: "Heavy Heap";
-    src: url("./fonts/heavy\ heap.ttf");
-}
-
-@font-face {
-    font-family: "Coolvetica";
-    src: url("./fonts/coolvetica\ rg.otf");
 }
