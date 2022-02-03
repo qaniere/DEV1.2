@@ -43,7 +43,10 @@ img {
     flex-wrap: wrap;
     margin-left: 28%;
     justify-content: center;
-    background-color: red;
+}
+
+#game-container, table {
+    border-radius: 30px;
 }
 
 #start-menu, #victory-screen {
@@ -80,9 +83,28 @@ img {
 
     display: none;
 
-    border-radius: 10px;
     border: 3px solid black;
     background-color: #f4f4ec;
+    border-right: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+
+.left-td {
+    border-top-left-radius: 30px;
+}
+
+.right-td {
+    border-top-right-radius: 30px;
+}
+
+.bottom-left-td {
+    border-bottom-left-radius: 30px;
+}
+
+.bottom-right-td {
+    border-bottom-right-radius: 30px;
 }
 
 

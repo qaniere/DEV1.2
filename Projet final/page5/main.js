@@ -103,6 +103,19 @@ function startGame() {
             let cell = row.insertCell(y); //Creation of a td element
             cell.id = x + "-" + y;
 
+            if(x == 0 && y == 0) {
+                cell.classList.add("left-td");
+
+            } else if(x == 0 && y == maxY - 1) {
+                cell.classList.add("right-td");
+
+            } else if(x == maxX - 1 && y == 0){
+                cell.classList.add("bottom-left-td");
+
+            } else if(x == maxX - 1 && y == maxY - 1){
+                cell.classList.add("bottom-right-td");
+            }
+
             if(level[x][y] === "G") {
                 cell.style.backgroundImage = "url('./sprites/ground.png')";
 
